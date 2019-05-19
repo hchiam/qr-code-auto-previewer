@@ -20,7 +20,7 @@ a {
 #overlay * {
   position: absolute;
   width: 90vw;
-  height: 50vh;
+  height: 80vh;
 }
 
 button {
