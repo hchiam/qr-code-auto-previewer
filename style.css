@@ -1,0 +1,49 @@
+* {
+  font-family: avenir, arial;
+  transition: 0.5s;
+}
+
+body {
+  background: #333;
+  color: grey;
+  padding: 0 10px;
+}
+
+a {
+  color: white;
+}
+
+#overlay {
+  background: black !important;
+}
+
+#overlay * {
+  position: absolute;
+  width: 90vw;
+  height: 50vh;
+}
+
+button {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: black;
+  color: white;
+}
+
+#placeholder {
+  text-align: center;
+  line-height: 50vh;
+  color: white;
+  z-index: 9999;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+video {
+  object-fit: cover;
+  -webkit-transform: scaleX(1) !important;
+  transform: scaleX(1) !important;
+}

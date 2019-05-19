@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/gh/schmich/instascan-builds@master/instascan.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <button id="clear-button" onclick="clearPreview()">Clear preview</button>
+
+    <button id="try-another-camera" onclick="tryAnotherCamera()">Try another camera</button>
+
+    <div id="overlay">
+    <div id="placeholder">Show me a QR code</div>
+    <video id="video"></video>
+    <iframe id="preview" src="" frameborder="0" style="opacity:0.5; z-index:9999;"></iframe>
+    </div>
+    
+    <script src="brain.js"></script>
+</body>
+</html>
