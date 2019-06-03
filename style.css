@@ -23,13 +23,22 @@ a {
   height: 80vh;
 }
 
+#scan {
+  background: yellow;
+}
+
+input {
+  border-radius: 5px;
+  padding: 5px;
+}
+
 button {
   padding: 10px;
   margin: 5px;
   border-radius: 5px;
 }
 
-button:hover {
+button:hover, #scan:hover {
   background: black;
   color: white;
 }
@@ -38,12 +47,18 @@ button:hover {
   text-align: center;
   line-height: 50vh;
   color: white;
-  z-index: 9999;
+  z-index: 100;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 video {
-/*   object-fit: cover; */
+  /*   object-fit: cover; */
   -webkit-transform: scaleX(1) !important;
   transform: scaleX(1) !important;
+}
+
+#create-qr-code {
+  position: absolute;
+  bottom: 10px;
+  z-index: 200;
 }
