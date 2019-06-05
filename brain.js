@@ -89,7 +89,7 @@ function useCamera() {
 
 function tryAnotherCamera() {
   cameraId += 1;
-  let atMaxIndex = (cameraId === numberofCameras);
+  let atMaxIndex = (cameraId === numberofCameras-1);
   if (atMaxIndex) {
     cameraId = 0;
   }
