@@ -11,7 +11,6 @@ $('#auto-scan').hide();
 let scanner = new Instascan.Scanner({
   video: document.getElementById('video')
 });
-
 scanner.addListener('scan', function (content) {
   console.log(content);
   var isOk = content.startsWith('https://') || content.startsWith('http://');
@@ -62,7 +61,6 @@ function autoScan() {
 }
 
 useCamera();
-
 function useCamera() {
   Instascan.Camera.getCameras().then(function (cameras) {
     if (cameras.length > 0) {
@@ -98,6 +96,8 @@ function clearPreview() {
   document.getElementById('clear-button').style.display = 'none';
 }
 
+$('#data').keyup(createQRCode);
+$('#data').change(createQRCode);
 function createQRCode() {
   var data = $('#data').val();
   $('#qr-code').empty();
@@ -108,9 +108,6 @@ function createQRCode() {
     $('#print-qr-code').hide();
   }
 };
-
-$('#data').keyup(createQRCode);
-$('#data').change(createQRCode);
 
 function printQRCode() {
   let elemID = 'qr-code';
