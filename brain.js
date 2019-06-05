@@ -111,10 +111,14 @@ function createQRCode() {
 
 function printQRCode() {
   let elemID = 'qr-code';
-  $('body > :not(#' + elemID + ')').hide();
+  let urlDisplay = 'url-display';
+  $('#url-display').show().text($('#data').val());
+  $('body > :not(#' + elemID + '):not(#' + urlDisplay + ')').hide();
+  $('#' + urlDisplay).appendTo('body');
   $('#' + elemID).appendTo('body');
   window.print();
   $('#' + elemID).appendTo('#qr-code-container');
+  $('#url-display').hide();
   $('#scan').show();
   $('#auto-scan').show();
   $('#overlay').show();
