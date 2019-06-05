@@ -25,6 +25,7 @@ scanner.addListener('scan', function (content) {
 });
 
 function scanNow() {
+  scanner.start(cameraSelected);
   isScanOn = true;
   $('#auto-scan').show();
   $('#scan').text('Scanning...').css({
@@ -38,6 +39,7 @@ function scanNow() {
       'background': 'yellow',
       'color': 'black'
     });
+    scanner.stop(cameraSelected);
   }, interval);
 }
 
@@ -50,6 +52,7 @@ function autoScan() {
     alert('Warning: Auto-scan will use more battery.');
     isScanOn = true;
     $('#scan').hide();
+    scanner.start(cameraSelected);
   } else {
     $('#auto-scan').css({
       'background': 'white',
@@ -57,15 +60,20 @@ function autoScan() {
     });
     isScanOn = false;
     $('#scan').show();
+    scanner.stop(cameraSelected);
   }
 }
 
 useCamera();
+let cameraSelected
 function useCamera() {
   Instascan.Camera.getCameras().then(function (cameras) {
     if (cameras.length > 0) {
       numberofCameras = cameras.length;
-      scanner.start(cameras[cameraId]);
+      cameraSelected = cameras[cameraId];
+      if (isScanOn) {
+        scanner.start(cameraSelected);
+      }
     } else {
       alert('No camera detected.');
       console.error('No camera detected.');
