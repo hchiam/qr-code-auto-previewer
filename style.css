@@ -68,6 +68,11 @@ video {
   z-index: 200;
 }
 
+a {
+  font-size: small;
+  color: grey;
+}
+
 a:hover {
   color: lime;
 }
