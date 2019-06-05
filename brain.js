@@ -14,7 +14,7 @@ let scanner = new Instascan.Scanner({
 
 scanner.addListener('scan', function (content) {
   console.log(content);
-  var isOk = content.startsWith('https://');
+  var isOk = content.startsWith('https://') || content.startsWith('http://');
   if (isScanOn && isOk) {
     document.getElementById('preview').src = content.replace(/^http:/,'https:');
     document.getElementById('preview').style.opacity = overlayOpacity;
