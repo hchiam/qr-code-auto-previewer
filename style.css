@@ -38,7 +38,7 @@ button {
   border-radius: 5px;
 }
 
-button:hover, #scan:hover {
+button:hover, #scan:hover, input:hover {
   background: black;
   color: white;
 }
