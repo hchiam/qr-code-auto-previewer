@@ -27,37 +27,26 @@ scanner.addListener('scan', function (content) {
 function scanNow() {
   scanner.start(cameraSelected);
   isScanOn = true;
-  $('#auto-scan').show();
-  $('#scan').text('Scanning...').css({
-    'background': 'blue',
-    'color': 'white'
-  });
+  $('#scan').text('Scanning...').addClass('scanning');
+  $('#auto-scan').hide();
   let interval = 5000;
   setTimeout(function() {
     isScanOn = false;
-    $('#scan').text('Scan Now').css({
-      'background': 'yellow',
-      'color': 'black'
-    });
+    $('#scan').text('Scan Now').removeClass('scanning');
+    $('#auto-scan').show();
     scanner.stop(cameraSelected);
   }, interval);
 }
 
 function autoScan() {
   if (isScanOn == false) {
-    $('#auto-scan').css({
-      'background': 'blue',
-      'color': 'white'
-    });
+    $('#auto-scan').addClass('scanning');
     alert('Warning: Auto-scan will use more battery.');
     isScanOn = true;
     $('#scan').hide();
     scanner.start(cameraSelected);
   } else {
-    $('#auto-scan').css({
-      'background': 'white',
-      'color': 'black'
-    });
+    $('#auto-scan').removeClass('scanning');
     isScanOn = false;
     $('#scan').show();
     scanner.stop(cameraSelected);
