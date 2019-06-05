@@ -3,9 +3,10 @@ let cameraId = 0; // default fallback
 let numberofCameras = 0; // default fallback
 let isScanOn = false;
 
-document.getElementById('clear-button').style.display = 'none';
-document.getElementById('try-another-camera').style.display = 'none';
+$('#clear-button').hide();
+$('#try-another-camera').hide();
 $('#print-qr-code').hide();
+$('#auto-scan').hide();
 
 let scanner = new Instascan.Scanner({
   video: document.getElementById('video')
@@ -26,22 +27,38 @@ scanner.addListener('scan', function (content) {
 
 function scanNow() {
   isScanOn = true;
-  document.getElementById('scan').style.background = 'blue';
-  document.getElementById('scan').style.color = 'white';
-  document.getElementById('scan').innerHTML = 'Scanning...';
+  $('#auto-scan').show();
+  $('#scan').text('Scanning...').css({
+    'background': 'blue',
+    'color': 'white'
+  });
   let interval = 5000;
   setTimeout(function() {
     isScanOn = false;
-    document.getElementById('scan').style.background = 'yellow';
-    document.getElementById('scan').style.color = 'black';
-    document.getElementById('scan').innerHTML = 'Scan Now';
+    $('#scan').text('Scan Now').css({
+      'background': 'yellow',
+      'color': 'black'
+    });
   }, interval);
 }
 
 function autoScan() {
-  document.getElementById('auto-scan').style.background = 'blue';
-  alert('Warning: Auto-scan will use more battery.');
-  isScanOn = true;
+  if (isScanOn == false) {
+    $('#auto-scan').css({
+      'background': 'blue',
+      'color': 'white'
+    });
+    alert('Warning: Auto-scan will use more battery.');
+    isScanOn = true;
+    $('#scan').hide();
+  } else {
+    $('#auto-scan').css({
+      'background': 'white',
+      'color': 'black'
+    });
+    isScanOn = false;
+    $('#scan').show();
+  }
 }
 
 useCamera();
