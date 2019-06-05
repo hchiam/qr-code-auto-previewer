@@ -35,6 +35,7 @@ function scanNow() {
     $('#scan').text('Scan Now').removeClass('scanning');
     $('#auto-scan').show();
     scanner.stop(cameraSelected);
+    webcamOn();
   }, interval);
 }
 
@@ -50,6 +51,7 @@ function autoScan() {
     isScanOn = false;
     $('#scan').show();
     scanner.stop(cameraSelected);
+    webcamOn();
   }
 }
 
@@ -78,7 +80,7 @@ function useCamera() {
 
 function tryAnotherCamera() {
   cameraId += 1;
-  let atMaxIndex = (cameraId === numberofCameras-1);
+  let atMaxIndex = (cameraId === numberofCameras);
   if (atMaxIndex) {
     cameraId = 0;
   }
@@ -121,4 +123,21 @@ function printQRCode() {
   $('#overlay').show();
   $('#create-qr-code').show();
   return true;
+}
+
+webcamOn();
+function webcamOn() {
+  if (navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({
+      video: {
+        width: 600,
+        height: 600
+      }
+    }).then(function(stream) {
+      let video = document.querySelector("video");
+      video.srcObject = stream;
+    }).catch(function(err) {
+      console.error(err.message);
+    });
+  }
 }
