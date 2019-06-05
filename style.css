@@ -43,6 +43,11 @@ button:hover, #scan:hover, input:hover {
   color: white;
 }
 
+.scanning {
+  background: blue !important;
+  color: white !important;
+}
+
 #placeholder {
   text-align: center;
   line-height: 50vh;
