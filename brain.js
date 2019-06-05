@@ -1,6 +1,6 @@
 let overlayOpacity = 0.75;
 let cameraId = 0; // default fallback
-let numberofCameras = 0; // default fallback
+let numberofCameras = 1; // default fallback
 let isScanOn = false;
 
 $('#clear-button').hide();
