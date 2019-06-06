@@ -4,12 +4,14 @@ let numberofCameras = 1; // default fallback
 let isScanOn = false;
 let cameraList = [];
 let cameraSelected;
+let cameraRetries = 0;
 let scanner;
 
 $('#clear-button').hide();
 $('#try-another-camera').hide();
 $('#print-qr-code').hide();
 $('#auto-scan').hide();
+$('#placeholder').hide();
 
 setUpScanner();
 function setUpScanner() {
@@ -40,12 +42,14 @@ function scanNow() {
   isScanOn = true;
   $('#scan').text('Scanning...').addClass('scanning');
   $('#auto-scan').hide();
+  $('#placeholder').show();
   let interval = 5000;
   setTimeout(function() {
     isScanOn = false;
     $('#scan').text('Scan Now').removeClass('scanning');
     $('#auto-scan').show();
-    scanner.stop(cameraSelected);
+    $('#placeholder').hide();
+    scanner.stop();
     webcamOn();
   }, interval);
 }
@@ -54,21 +58,22 @@ function autoScan() {
   if (isScanOn == false) {
     $('#auto-scan').addClass('scanning');
     alert('Warning: Auto-scan will use more battery.');
-    isScanOn = true;
     $('#scan').hide();
+    $('#placeholder').show();
+    isScanOn = true;
     scanner.start(cameraSelected);
   } else {
     $('#auto-scan').removeClass('scanning');
-    isScanOn = false;
     $('#scan').show();
-    scanner.stop(cameraSelected);
+    $('#placeholder').hide();
+    isScanOn = false;
+    scanner.stop();
     webcamOn();
   }
 }
 
 useCamera();
 function useCamera() {
-  setUpScanner();
   Instascan.Camera.getCameras().then(function (cameras) {
     cameraList = cameras;
     if (cameras.length > 0) {
@@ -82,12 +87,15 @@ function useCamera() {
       console.error('No camera detected.');
     }
     if (numberofCameras > 1) {
-      document.getElementById('try-another-camera')
-        .style.display = 'initial';
+      $('#try-another-camera').show();
     }
+    cameraRetries = 0;
   }).catch(function (e) {
-    alert(e);
     console.error(e);
+    if (cameraRetries < 5) {
+      cameraRetries++;
+      useCamera();
+    }
   });
 }
 
@@ -97,7 +105,7 @@ function tryAnotherCamera() {
   if (atMaxIndex) {
     cameraId = 0;
   }
-  scanner.stop(cameraSelected);
+  scanner.stop();
   cameraSelected = cameraList[cameraId];
   console.log(cameraId);
   useCamera();
