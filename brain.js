@@ -2,27 +2,38 @@ let overlayOpacity = 0.75;
 let cameraId = 0; // default fallback
 let numberofCameras = 1; // default fallback
 let isScanOn = false;
+let cameraList = [];
+let cameraSelected;
+let scanner;
 
 $('#clear-button').hide();
 $('#try-another-camera').hide();
 $('#print-qr-code').hide();
 $('#auto-scan').hide();
 
-let scanner = new Instascan.Scanner({
-  video: document.getElementById('video')
-});
-scanner.addListener('scan', function (content) {
+setUpScanner();
+function setUpScanner() {
+  scanner = new Instascan.Scanner({
+    video: document.getElementById('video')
+  });
+  scanner.removeListener('scan', scannerListener);
+  scanner.addListener('scan', scannerListener);
+}
+
+function scannerListener(content) {
   console.log(content);
-  var isOk = content.startsWith('https://') || content.startsWith('http://');
+  var isOk = 
+      content.startsWith('https://') || content.startsWith('http://');
   if (isScanOn && isOk) {
-    document.getElementById('preview').src = content.replace(/^http:/,'https:');
+    document.getElementById('preview').src = 
+      content.replace(/^http:/,'https:');
     document.getElementById('preview').style.opacity = overlayOpacity;
     document.getElementById('placeholder').innerHTML = '';
     document.getElementById('clear-button').style.display = 'initial';
     // this line will auto-open the content in another window:
     // window.open(content);
   }
-});
+}
 
 function scanNow() {
   scanner.start(cameraSelected);
@@ -56,9 +67,10 @@ function autoScan() {
 }
 
 useCamera();
-let cameraSelected
 function useCamera() {
+  setUpScanner();
   Instascan.Camera.getCameras().then(function (cameras) {
+    cameraList = cameras;
     if (cameras.length > 0) {
       numberofCameras = cameras.length;
       cameraSelected = cameras[cameraId];
@@ -70,7 +82,8 @@ function useCamera() {
       console.error('No camera detected.');
     }
     if (numberofCameras > 1) {
-      document.getElementById('try-another-camera').style.display = 'initial';
+      document.getElementById('try-another-camera')
+        .style.display = 'initial';
     }
   }).catch(function (e) {
     alert(e);
@@ -80,10 +93,12 @@ function useCamera() {
 
 function tryAnotherCamera() {
   cameraId += 1;
-  let atMaxIndex = (cameraId === numberofCameras);
+  let atMaxIndex = (cameraId >= numberofCameras);
   if (atMaxIndex) {
     cameraId = 0;
   }
+  scanner.stop(cameraSelected);
+  cameraSelected = cameraList[cameraId];
   console.log(cameraId);
   useCamera();
 }
