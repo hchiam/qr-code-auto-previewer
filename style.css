@@ -27,11 +27,6 @@ a {
   background: yellow;
 }
 
-input {
-  border-radius: 5px;
-  padding: 5px;
-}
-
 button {
   padding: 10px;
   margin: 5px;
@@ -66,6 +61,16 @@ video {
   position: absolute;
   bottom: 10px;
   z-index: 200;
+}
+
+#create-qr-code input {
+  border-radius: 5px;
+  padding: 5px;
+  width: 7.5em;
+}
+
+#create-qr-code input:focus {
+  width: 14em;
 }
 
 a {
