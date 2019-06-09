@@ -56,7 +56,7 @@ function scanNow() {
 
 function autoScan() {
   if (isScanOn == false) {
-    $('#auto-scan').addClass('scanning').text('Auto-Scan ON (click to turn off)');
+    $('#auto-scan').addClass('scanning').text('Auto-Scanning... (click to turn off)');
     alert('Warning: Auto-scan will use more battery.');
     $('#scan').hide();
     $('#placeholder').show();
