@@ -56,14 +56,14 @@ function scanNow() {
 
 function autoScan() {
   if (isScanOn == false) {
-    $('#auto-scan').addClass('scanning').text('Auto-Scan On (click to turn off)');
+    $('#auto-scan').addClass('scanning').text('Auto-Scan ON (click to turn off)');
     alert('Warning: Auto-scan will use more battery.');
     $('#scan').hide();
     $('#placeholder').show();
     isScanOn = true;
     scanner.start(cameraSelected);
   } else {
-    $('#auto-scan').removeClass('scanning').text('Auto-Scan Off');
+    $('#auto-scan').removeClass('scanning').text('Auto-Scan OFF');
     $('#scan').show();
     $('#placeholder').hide();
     isScanOn = false;
