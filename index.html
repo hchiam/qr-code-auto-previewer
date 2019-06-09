@@ -37,6 +37,7 @@
         </script>
 </head>
 <body>
+    <!-- note to self: to copy from CodePen, paste starting here: -->
     <button id="scan" onclick="scanNow()">Scan Now</button>
 
     <button id="auto-scan" onclick="autoScan()">Auto-Scan Off</button>
@@ -47,21 +48,20 @@
 
     <div id="overlay">
         <div id="placeholder">Show me a QR code</div>
-        <video id="video"></video>
+        <video id="video" autoplay></video>
         <iframe id="preview" src="" frameborder="0" style="opacity:0.5; z-index:100;"></iframe>
     </div>
 
     <div id="create-qr-code">
-        <input id="data" type="text" placeholder="URL to create QR code" title="Enter URL to create QR code">
+        <input id="data" type="text" placeholder="Create QR Code (enter a URL)" title="Enter URL to create QR code">
+        <button id="print-qr-code" onclick="printQRCode()">Print QR Code</button>
         <p id="url-display"></p>
         <div id="qr-code-container">
             <div id="qr-code"></div>
         </div>
-        <button id="print-qr-code" onclick="printQRCode()">Print QR Code</button>
-        
         <p><a href="https://github.com/hchiam/qr-code-auto-previewer" target="_blank">https://github.com/hchiam/qr-code-auto-previewer</a></p>
     </div>
-    
+    <!-- note to self: to copy from CodePen and paste here, stop before this line -->
     <script src="brain.js"></script>
 </body>
 </html>
